@@ -1,7 +1,5 @@
 package com.example.libreria_back.entity;
 
-import java.util.Objects;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,99 +9,41 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "trabajadores")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TrabajadorEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_trabajador")
 	private Long idTrabajador;
-	
-	 @Column(name="codigo")
-	  private String codigo;
 
-	  @Column(name="estado_laboral")
-	  private Boolean estadoLaboral;
+	@Column(name = "codigo")
+	private String codigo;
 
-	  @Column(name="estado")
-	  @Enumerated(EnumType.STRING)
-	  private EstadoTrabajador estado;
-	  
-	  @ManyToOne
-	  @JoinColumn(name="id_persona")
-	  @NotNull
-	  private PersonaEntity persona;
+	@Column(name = "estado_laboral")
+	private Boolean estadoLaboral;
 
-	  public TrabajadorEntity() {
-	    this.persona = new PersonaEntity();
-	  }
-	  
-	  public enum EstadoTrabajador {
-		  ACTIVO,
-		  INACTIVO
-		}
+	@Column(name = "estado")
+	@Enumerated(EnumType.STRING)
+	private EstadoTrabajador estado;
 
-	public Long getIdTrabajador() {
-		return idTrabajador;
+	@ManyToOne
+	@JoinColumn(name = "id_persona")
+	@NotNull
+	private PersonaEntity persona;
+
+	public enum EstadoTrabajador {
+		ACTIVO,
+		INACTIVO
 	}
-
-	public void setIdTrabajador(Long idTrabajador) {
-		this.idTrabajador = idTrabajador;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public Boolean getEstadoLaboral() {
-		return estadoLaboral;
-	}
-
-	public void setEstadoLaboral(Boolean estadoLaboral) {
-		this.estadoLaboral = estadoLaboral;
-	}
-
-	public EstadoTrabajador getEstado() {
-		return estado;
-	}
-
-	public void setEstado(EstadoTrabajador estado) {
-		this.estado = estado;
-	}
-
-	public PersonaEntity getPersona() {
-		return persona;
-	}
-
-	public void setPersona(PersonaEntity persona) {
-		this.persona = persona;
-	}
-    
-
-@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		TrabajadorEntity that = (TrabajadorEntity) o;
-		return Objects.equals(idTrabajador, that.idTrabajador);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(idTrabajador);
-	}
-
-	  
-	  
 }

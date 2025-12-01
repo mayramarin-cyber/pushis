@@ -3,7 +3,6 @@ package com.example.libreria_back.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +23,9 @@ import com.example.libreria_back.entity.CategoriaEntity;
 import com.example.libreria_back.entity.EditorialEntity;
 
 import java.util.List;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-@CrossOrigin(origins = "http://localhost:51985")
+@Tag(name = "Libros", description = "API de gestión de libros")
 @RestController
 @RequestMapping("/api/libros")
 public class LibroController {
@@ -44,8 +44,7 @@ public class LibroController {
 
 	@GetMapping("/listar")
 	public ResponseEntity<List<LibroEntity>> listarLibros() {
-		
-		
+
 		List<LibroEntity> libros = libroService.listarLibros();
 		return new ResponseEntity<>(libros, HttpStatus.OK);
 	}

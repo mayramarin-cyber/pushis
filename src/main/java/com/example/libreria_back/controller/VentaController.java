@@ -26,11 +26,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/ventas")
 public class VentaController {
-	
-	@Autowired
-	private VentaService ventaService;
-	
-	@Autowired
+
+    @Autowired
+    private VentaService ventaService;
+
+    @Autowired
     private UsuarioService usuarioService;
 
     @Autowired
@@ -38,7 +38,6 @@ public class VentaController {
 
     @Autowired
     private ClienteService clienteService;
-	
 
     @GetMapping("/listar")
     public ResponseEntity<List<VentaEntity>> listarVentas() {
@@ -71,7 +70,8 @@ public class VentaController {
 
             if (venta.getTrabajador() != null) {
                 // Asegúrate de que el trabajador exista antes de crear la venta
-                TrabajadorEntity trabajador = trabajadorService.listarTrabajadorPorId(venta.getTrabajador().getIdTrabajador());
+                TrabajadorEntity trabajador = trabajadorService
+                        .listarTrabajadorPorId(venta.getTrabajador().getIdTrabajador());
                 if (trabajador != null) {
                     venta.setTrabajador(trabajador);
                 } else {
@@ -105,13 +105,13 @@ public class VentaController {
 
             if (ventaExistente != null) {
                 // Actualiza los campos básicos de la venta
-            	 if (newVenta.getNumVenta() != null) {
-		                ventaExistente.setNumVenta(newVenta.getNumVenta());
-		            }
-	        	
-	        	 if (newVenta.getCambio() != null) {
-		                ventaExistente.setCambio(newVenta.getCambio());
-		            }
+                if (newVenta.getNumVenta() != null) {
+                    ventaExistente.setNumVenta(newVenta.getNumVenta());
+                }
+
+                if (newVenta.getCambio() != null) {
+                    ventaExistente.setCambio(newVenta.getCambio());
+                }
                 if (newVenta.getRuc() != null) {
                     ventaExistente.setRuc(newVenta.getRuc());
                 }
@@ -127,11 +127,12 @@ public class VentaController {
                 if (newVenta.getMetodoPago() != null) {
                     ventaExistente.setMetodoPago(newVenta.getMetodoPago());
                 }
-                if (newVenta.getFecnaVenta() != null) {
-                    ventaExistente.setFecnaVenta(newVenta.getFecnaVenta());
+                if (newVenta.getFechaVenta() != null) {
+                    ventaExistente.setFechaVenta(newVenta.getFechaVenta());
                 }
 
-                // Actualiza las relaciones con las entidades relacionadas (usuario, trabajador, cliente)
+                // Actualiza las relaciones con las entidades relacionadas (usuario, trabajador,
+                // cliente)
                 if (newVenta.getUsuario() != null) {
                     if (newVenta.getUsuario().getIdUsuario() != null) {
                         UsuarioEntity usuario = usuarioService.listarUsuarioPorId(newVenta.getUsuario().getIdUsuario());
@@ -143,7 +144,8 @@ public class VentaController {
 
                 if (newVenta.getTrabajador() != null) {
                     if (newVenta.getTrabajador().getIdTrabajador() != null) {
-                        TrabajadorEntity trabajador = trabajadorService.listarTrabajadorPorId(newVenta.getTrabajador().getIdTrabajador());
+                        TrabajadorEntity trabajador = trabajadorService
+                                .listarTrabajadorPorId(newVenta.getTrabajador().getIdTrabajador());
                         ventaExistente.setTrabajador(trabajador);
                     } else {
                         ventaExistente.setTrabajador(null);

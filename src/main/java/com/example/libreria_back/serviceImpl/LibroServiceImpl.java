@@ -15,7 +15,6 @@ import com.example.libreria_back.service.CategoriaService;
 import com.example.libreria_back.service.EditorialService;
 import com.example.libreria_back.service.LibroService;
 
-import jakarta.persistence.NonUniqueResultException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -92,8 +91,8 @@ public class LibroServiceImpl implements LibroService {
 				if (newLibro.getTitulo() != null) {
 					libroExistente.setTitulo(newLibro.getTitulo());
 				}
-				if (newLibro.getnPaginas() != null) {
-					libroExistente.setnPaginas(newLibro.getnPaginas());
+				if (newLibro.getNPaginas() != null) {
+					libroExistente.setNPaginas(newLibro.getNPaginas());
 				}
 				if (newLibro.getCodigo() != null) {
 					libroExistente.setCodigo(newLibro.getCodigo());
@@ -104,7 +103,6 @@ public class LibroServiceImpl implements LibroService {
 				if (newLibro.getStock() != null) {
 					libroExistente.setStock(newLibro.getStock());
 				}
-				
 
 				// Actualiza los campos relacionados: Autor, Categoria y Editorial
 				if (newLibro.getAutor() != null && newLibro.getAutor().getIdAutor() != null) {
@@ -141,14 +139,12 @@ public class LibroServiceImpl implements LibroService {
 		// TODO Auto-generated method stub
 		libroDao.deleteById(id);
 	}
-	
-	
+
 	@Override
 	@Transactional
 	public List<LibroEntity> buscarLibroPorCodigo(String codigo) {
 		// TODO Auto-generated method stub
 		return libroDao.findByCodigo(codigo);
 	}
-
 
 }

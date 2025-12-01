@@ -7,11 +7,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "personas")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PersonaEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_persona")
@@ -26,51 +32,9 @@ public class PersonaEntity {
 	private String apellidos;
 
 	@Column(name = "dni")
-
-	private Integer dni;
+	private String dni;
 
 	@Column(name = "telefono")
-
-	private Integer telefono;
-
-	public Long getIdPersona() {
-		return idPersona;
-	}
-
-	public void setIdPersona(Long idPersona) {
-		this.idPersona = idPersona;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	public Integer getDni() {
-		return dni;
-	}
-
-	public void setDni(Integer dni) {
-		this.dni = dni;
-	}
-
-	public Integer getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(Integer telefono) {
-		this.telefono = telefono;
-	}
+	private String telefono;
 
 }

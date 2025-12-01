@@ -1,7 +1,5 @@
 package com.example.libreria_back.entity;
 
-import java.util.Objects;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,9 +9,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "detalleventas")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DetalleVentaEntity {
 
 	@Id
@@ -36,65 +40,4 @@ public class DetalleVentaEntity {
 	@JoinColumn(name = "id_libro")
 	@NotNull
 	private LibroEntity libro;
-
-	public DetalleVentaEntity() {
-		this.venta = new VentaEntity();
-		this.libro = new LibroEntity();
-
-	}
-
-	public Long getIdDetalleVenta() {
-		return idDetalleVenta;
-	}
-
-	public void setIdDetalleVenta(Long idDetalleVenta) {
-		this.idDetalleVenta = idDetalleVenta;
-	}
-
-	public Integer getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
-	}
-
-	public Double getPrecioCompra() {
-		return precioCompra;
-	}
-
-	public void setPrecioCompra(Double precioCompra) {
-		this.precioCompra = precioCompra;
-	}
-
-	public VentaEntity getVenta() {
-		return venta;
-	}
-
-	public void setVenta(VentaEntity venta) {
-		this.venta = venta;
-	}
-
-	public LibroEntity getLibro() {
-		return libro;
-	}
-
-	public void setLibro(LibroEntity libro) {
-		this.libro = libro;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		DetalleVentaEntity that = (DetalleVentaEntity) o;
-		return Objects.equals(idDetalleVenta, that.idDetalleVenta);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(idDetalleVenta);
-	}
 }
