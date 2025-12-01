@@ -10,18 +10,18 @@ import com.example.libreria_back.entity.PersonaEntity;
 import com.example.libreria_back.service.PersonaService;
 
 import jakarta.transaction.Transactional;
+
 @Service
-public class PersonaServiceImpl implements PersonaService{
+public class PersonaServiceImpl implements PersonaService {
 
 	private final PersonaDao personaDao;
-	
+
 	@Autowired
-	
+
 	public PersonaServiceImpl(PersonaDao personaDao) {
 		this.personaDao = personaDao;
 	}
-	
-	
+
 	@Override
 	@Transactional
 	public List<PersonaEntity> listarPersonas() {
@@ -31,9 +31,9 @@ public class PersonaServiceImpl implements PersonaService{
 
 	@Override
 	@Transactional
-	public PersonaEntity listarPersonaPorId(long id) {
+	public PersonaEntity listarPersonaPorId(Long id) {
 		// TODO Auto-generated method stub
-		return personaDao.findById(id).orElseGet(null);
+		return personaDao.findById(id).orElse(null);
 	}
 
 	@Override
@@ -48,23 +48,23 @@ public class PersonaServiceImpl implements PersonaService{
 	public PersonaEntity updatePersona(Long id, PersonaEntity newPersona) {
 		PersonaEntity personaExistente = personaDao.findById(id).orElse(null);
 
-		if(personaExistente != null) {
+		if (personaExistente != null) {
 			if (newPersona.getNombre() != null) {
 				personaExistente.setNombre(newPersona.getNombre());
 			}
-			if (newPersona.getApellidos()!= null) {
+			if (newPersona.getApellidos() != null) {
 				personaExistente.setApellidos(newPersona.getApellidos());
 			}
-			
-	if (newPersona.getDni()!= null) {
+
+			if (newPersona.getDni() != null) {
 				personaExistente.setDni(newPersona.getDni());
 			}
 
-if (newPersona.getTelefono()!= null) {
+			if (newPersona.getTelefono() != null) {
 				personaExistente.setTelefono(newPersona.getTelefono());
 			}
 			return personaDao.save(personaExistente);
-			
+
 		} else {
 			return null;
 		}
@@ -74,7 +74,7 @@ if (newPersona.getTelefono()!= null) {
 	@Transactional
 	public void deletePersona(Long id) {
 		personaDao.deleteById(id);
-		
+
 	}
 
 }

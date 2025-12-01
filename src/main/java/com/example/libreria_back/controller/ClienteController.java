@@ -29,9 +29,9 @@ public class ClienteController {
 
 	@Autowired
 	private PersonaService personaService;
-	
+
 	@Autowired
-	private ClienteDao clienteDao ;
+	private ClienteDao clienteDao;
 
 	@GetMapping("/listar")
 	public ResponseEntity<List<ClienteEntity>> listarCliente() {
@@ -41,21 +41,20 @@ public class ClienteController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ClienteEntity> listarClientePorId(@PathVariable Long id) {
-		  ClienteEntity cliente = clienteDao.findByIdWithPersona(id).orElse(null);
+		ClienteEntity cliente = clienteDao.findByIdWithPersona(id).orElse(null);
 
-		    if (cliente != null) {
-		        return new ResponseEntity<>(cliente, HttpStatus.OK);
-		    } else {
-		        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		    }
+		if (cliente != null) {
+			return new ResponseEntity<>(cliente, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
-	
 	@GetMapping("/buscarPorDNI/{dni}")
-	public List<ClienteEntity> buscarPersonaPorDni(@PathVariable Integer dni) {
-        return clienteService.buscarPersonaPorDni(dni);
-    }
-	
+	public List<ClienteEntity> buscarPersonaPorDni(@PathVariable String dni) {
+		return clienteService.buscarPersonaPorDni(dni);
+	}
+
 	@PostMapping("/crear")
 	public ResponseEntity<?> crearCliente(@RequestBody ClienteEntity cliente) {
 

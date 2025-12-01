@@ -10,12 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.example.libreria_back.entity.ClienteEntity;
 
-
 @Repository
-public interface ClienteDao extends JpaRepository<ClienteEntity, Long>{
-	
+public interface ClienteDao extends JpaRepository<ClienteEntity, Long> {
+
 	@Query("SELECT c FROM ClienteEntity c JOIN FETCH c.persona WHERE c.idCliente = :id")
-    Optional<ClienteEntity> findByIdWithPersona(@Param("id") Long id);
-	
-	 List<ClienteEntity> findByPersonaDni(Integer dni);
+	Optional<ClienteEntity> findByIdWithPersona(@Param("id") Long id);
+
+	List<ClienteEntity> findByPersonaDni(String dni);
 }
